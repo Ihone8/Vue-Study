@@ -1,0 +1,8 @@
+{
+  "css": {
+    "style": [
+
+      "replace_with_path_to_your_css_bootstrap_file" //i.e bower_components/bootstrap/dist/bootstrap.css
+    ]
+  }
+}

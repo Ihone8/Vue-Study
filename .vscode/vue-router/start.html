@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-router</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <style>
+        .login{
+            height: 300px;
+            width: 200px;
+            background-color: azure;
+            border-radius: 50%;
+            text-align: center;
+        }
+        .register {
+            height: 500px;
+            width: 300px;
+            background-color: blanchedalmond;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>Hello APP</h1>
+        <p>
+            <!-- -->
+            <router-link to="/foo">Go to foo</router-link>
+            <router-link to="/bar">Go to bar</router-link>
+        </p>
+        <router-view></router-view>
+    </div>
+    <script>
+        // 1.定义路由组件
+        // 可以 import 进来
+        const Foo = {template:`<div class='login'>
+            <h1>登入</h1>
+            </div>`}
+        const Bar = {template:`<div class='register'>
+            <h1>注册</h1>
+            </div>`}
+
+        // 2.定义路由
+        const routes = [
+            { path:'/foo',component:Foo},
+            { path:'/bar',component:Bar}
+        ]
+        const router =new VueRouter({
+            routes
+        })
+        const app = new Vue({
+            router
+        }).$mount("#app")
+    </script>
+</body>
+</html>

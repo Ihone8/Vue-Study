@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>cho3</title>
+</head>
+<body>
+    <div id="app">
+        <ol>
+            <todo-item info="Hello Component"></todo-item>
+        </ol>
+        <ol>
+            <student-item v-for="item in students" v-bind:stu="item" v-bind:key="item.name"></student-item>
+        </ol>
+    </div>
+    <script src="../Vue.js"></script>
+    <script>
+        //在Vue中添加 todo-item 组件
+        Vue.component('todo-item',{
+            props:['info','vtitle'],
+            template:`<li>{{info || 'empty' }}</li>`
+        });
+        // student-item 组件
+        Vue.component('student-item',{
+            props:['stu'],
+            template:`<li>{{ stu.name }} - {{ stu.age }}</li>`
+        });
+        //构建
+        var app = new Vue({
+            el:"#app",
+            data:{
+                students:[
+                    {name:'tom',age:18},
+                    {name:'bli',age:12},
+                    {name:'sar',age:22},
+                    {"name":"rose","age":80},
+                    {"name":"lucy","age":8}
+                ]
+            }
+        });
+    </script>
+</body>
+</html>

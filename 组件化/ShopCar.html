@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>购物车案例</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <br/>
+            <br/>
+
+            <div class="form-inline col-md-8" hidden>
+                <label for="" class="form-label col-md-2">名称:</label>
+                <input type="text" v-model="products.title" placeholder="商品名称" class="form-control col-md-8">
+            </div>
+            <br/>
+            <div class="form-inline col-md-8" hidden>
+                <label for="" class="form-label col-md-2">数量:</label>
+                <input type="number" v-model="products.quantity" placeholder="只能是数字" class="form-control col-md-8">
+            </div>
+            <br/>
+            <div class="form-inline col-md-8" hidden>
+                <label for="" class="form-label col-md-2">单价:</label>
+                <input type="number" v-model="products.price" placeholder="只能是数字" class="form-control col-md-8">
+            </div>
+            <br/>
+            <div class="form-inline col-md-8" hidden>
+                <button class="btn btn-primary offset-md-2 col-md-8" disabled v-on:click="NewProducts()">添加</button>
+            </div>
+            <br/>
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <td colspan="6">总价：{{ total | currency}}&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-primary">结账</button>
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td>序号</td>
+                    <td>名称</td>
+                    <td>单价</td>
+                    <td>数量</td>
+                    <td>小计</td>
+                    <td>操作</td>
+                </tr>
+                <tr v-for="(pdt,index) in products">
+                    <td>{{ index + 1 }}</td>
+                    <td>{{ pdt.title}}</td>
+                    <td>{{ pdt.price}}</td>
+                    <td class="form-inline">
+                        <button class="btn btn-default" v-on:click="pdt.quantity <=0 ? 0:pdt.quantity -= 1 "> - </button>&nbsp;&nbsp;&nbsp;
+                        <input type="text" v-model="pdt.quantity" v-on:keyup="pdt.quantity <=0 ? 0 : pdt.quantity" class="form-control">&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-default" v-on:click="pdt.quantity = parseInt(pdt.quantity)+1"> + </button>
+                    </td>
+                    <td>￥{{ pdt.price * pdt.quantity }}</td>
+                    <td>
+                        <button class="btn btn-danger" v-on:click="remove(index)">Remove</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script src="../Vue.js"></script>
+    
+    <script>
+        Vue.filter("currency", function (v, n) {
+            if (!v) {
+                return "";
+            }
+            return "￥" + v.toFixed(n || 2);
+        });
+        var app = new Vue({
+            el: "#app",
+            data: {
+                orderby: "",
+                isAsc: true,
+                products: [{
+                        title: 'Iphone',
+                        quantity: 2,
+                        price: 5550
+                    },
+                    {
+                        title: 'OPPO',
+                        quantity: 12,
+                        price: 2999
+                    },
+                    {
+                        title: 'VIVO',
+                        quantity: 8,
+                        price: 3499
+                    },
+                    {
+                        title: 'HuaWei',
+                        quantity: 7,
+                        price: 4999
+                    },
+                    {
+                        title: 'Samsung',
+                        quantity: 2,
+                        price: 5000
+                    },
+                ],
+                
+            },
+            computed:{
+                total:function(){
+                    var sum = 0;
+                    for (var index = 0; index < this.products.length; index++) {
+                        sum += (this.products[index].quantity * this.products[index].price);   
+                    }
+                    return sum;
+                }
+            }
+            ,
+            methods: {
+                remove: function (i) {
+                    if (confirm("确定删除?")) {
+                        this.products.splice(i, 1);
+                    }
+                },
+                NewProducts: function () {
+                    this.products.push(
+                      new ProductsItem(
+                          this.products.title,
+                          this.products.quantity,
+                          this.products.price
+                      )
+                    )
+                }
+            }
+        })
+        var ProductsItem = (function () {           
+            return function (title, quantity,price) {
+                this.title = title;
+                this.quantity = quantity;
+                this.price = price;
+            }
+        })()
+    </script>
+</body>
+
+</html>
