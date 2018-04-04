@@ -12,6 +12,7 @@
 <body>
     <div id="app">
         <div class="container">
+            
             <br/>
             <br/>
 
@@ -38,6 +39,8 @@
                 <tr>
                     <td colspan="6">总价：{{ total | currency}}&nbsp;&nbsp;&nbsp;&nbsp;
                         <button class="btn btn-primary">结账</button>
+                        <button class="btn btn-default" v-on:click="PriceOrderByASC()">价格从低到高</button>
+                        <button class="btn btn-default" v-on:click="PriceOrderByDESC()">价格从高到低</button>
                     </td>
                     
                 </tr>
@@ -66,7 +69,7 @@
             </table>
         </div>
     </div>
-    <script src="../VueJs/Vue.js"></script>
+    <script src="../static/Vue.js"></script>
     
     <script>
         Vue.filter("currency", function (v, n) {
@@ -109,6 +112,7 @@
                 
             },
             computed:{
+                //计算总价
                 total:function(){
                     var sum = 0;
                     for (var index = 0; index < this.products.length; index++) {
@@ -119,11 +123,13 @@
             }
             ,
             methods: {
+                //删除商品
                 remove: function (i) {
                     if (confirm("确定删除?")) {
                         this.products.splice(i, 1);
                     }
                 },
+                //添加
                 NewProducts: function () {
                     this.products.push(
                       new ProductsItem(
@@ -132,9 +138,16 @@
                           this.products.price
                       )
                     )
+                },
+                PriceOrderByASC:function(){ 
+                this.products = this. products.sort(sortExp("price",true))  
+                },
+                PriceOrderByDESC:function(){
+                    this.products = this. products.sort(sortExp("price",false))  
                 }
             }
         })
+        //添加数据方法
         var ProductsItem = (function () {           
             return function (title, quantity,price) {
                 this.title = title;
@@ -142,6 +155,18 @@
                 this.price = price;
             }
         })()
+         //根据排序关键字与是否为升序产生排序方法
+         var sortExp = function(key, isAsc) {
+                return function(x, y) {
+                    if(isNaN(x[key])) { //如果当前排序的不是数字
+                        if(x[key] > y[key]) return 1*(isAsc?1:-1);
+                        if(x[key] < y[key]) return -1*(isAsc?1:-1);
+                        return 0;
+                    }else{
+                        return (x[key]-y[key])*(isAsc?1:-1);
+                    }
+                }
+            };
     </script>
 </body>
 
