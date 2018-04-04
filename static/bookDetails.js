@@ -1,8 +1,10 @@
 var BookList = (function(){
+    var id  = 1;
     return function(title,author,price){
         this.title  = title;
         this.author  = author;
         this.price = price;
+        this.id = id++;
     }
 })();
 
@@ -10,20 +12,54 @@ new Vue({
     el:"#bookapp",
     data:{
         booklist :[
-            {title:"三国演义",author:"罗贯中",price:32},
-            {title:"水浒传",author:"施耐庵",price:30},
-            {title:"红楼梦",author:"曹雪芹",price:24},
-            {title:"西游记",author:"吴承恩",price:20},
-        ]
+        ],
+        todoItem:{
+            id:'',
+            title:'',
+            author:'',
+            price:''
+        }
     },
     methods:{
+        //删除
         remove:function(index){
             this.booklist.splice(index,1);
+            this.todoItem.title = '';
+            this.todoItem.author = '';
+            this.todoItem.price = '';
         },
+        //添加
         addnewbooks:function(){
-            this.booklist.push(new BookList(this.booklist.title,this.booklist.author,this.booklist.price));
-            this.booklist.title = this.booklist.author = "";
-            this.booklist.price = 0;
-        }
+            //判断修改 还是 新增
+            if(this.todoItem.id){
+                var obj = this.booklist.filter(b => b.id === this.todoItem.id)[0];
+                obj.title = this.todoItem.title ;
+                obj.author = this.todoItem.author;
+                obj.price = this.todoItem.price;
+            }
+            else{
+                this.booklist.push(new BookList(this.todoItem.title,this.todoItem.author,this.todoItem.price));            
+            }        
+            this.todoItem= {
+                title:'',
+                author:'',
+                price:0
+            }
+        },
+        //编辑
+        edit:function(id){
+            var obj = this.booklist.filter(b => b.id === id)[0];
+            // this.booklist.title = obj.title;
+            // this.booklist.author = obj.author;
+            // this.booklist.price = obj.price;
+            this.todoItem = {
+                id:obj.id,
+                title:obj.title,
+                author:obj.author,
+                price: obj.price
+            }        
+           
+        },
+       
     }
 })
