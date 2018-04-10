@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue模板语法</title> 
+</head>
+<body>
+    <div id="app">
+        <button type="button" v-on:click="isShow = !isShow">反转{{isShow}}</button>
+        <button type="button" v-if="isShow">提交 V-if</button>
+        <button type="button" v-show="isShow">提交 v-Show</button>
+        <br/>
+        <br/>
+        <p>
+            等级A-C ： <input type="text" v-model="type"> 
+        </p>
+        <p v-if="type === 'A'">
+            优秀
+        </p>
+        <p v-else-if="type === 'B'">
+            良好
+        </p>
+        <p v-else-if="type === 'C'">
+            及格
+        </p>
+        <p v-else>
+            差
+        </p>
+    </div>
+    <script src="../static/Vue.js"></script>
+    <script>
+    new Vue({
+        el:"#app",
+        data:{
+            type:'D',
+            isShow:true
+        }
+    })
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS与Style 绑定</title>
+    <style>
+        .valide{
+            display: none;
+        }
+        .priceRequired{
+            display: inline;
+        }
+        .priceRange{
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <span class="bgGreen" v-bind:class="{bgRed:isShow,bgBlue,isActive}"> span1 </span>
+    </div>
+</body>
+</html>

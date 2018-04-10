@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue模板语法</title>
+</head>
+<body>
+    <div id="app1">
+        <span>{{ mes |toUpper | toLower('zhuhai')}}</span>
+    </div>
+    <div id="app2">
+        <span v-bind:title="'Hello Filter' | toUpper">{{ mes | toUpper | toLower}}</span>
+    </div>
+    <script src="../static/Vue.js"></script>
+    <script>
+        //全局过滤器
+     Vue.filter('toUpper',function(value){
+         return value.toUpperCase();
+     });
+     var app1 =new Vue({
+         el:"#app1",
+         data:{
+             mes:"China"
+         },
+         filters:{
+             //带有参数的当前实例过滤器
+             toLower:function(value,add){
+                 return value.toLowerCase() + add ;
+             }
+         }
+     });
+     
+     //可以使用全局过滤器
+     var app2 =new Vue({
+         el:"#app2",
+         data:{
+             mes:"Vue"
+         }
+     });
+    </script>
+</body>
+</html>
