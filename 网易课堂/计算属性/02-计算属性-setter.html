@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>计算属性Setter</title>
+</head>
+<body>
+    <div id="app">
+        <p>Name: {{fullName}}</p>
+        <button v-on:click="deal()">调用计算属性setter</button>
+    </div>
+    <script src="../../static/Vue.js"></script>
+    <script>
+    new Vue({
+        el:"#app",
+        data:{
+            firstName:"zhang",
+            lastName:"shangfeng",
+        },
+        methods:{
+            deal(){
+                this.fullName = "Jack Lou"
+            }
+        }
+        ,
+        computed:{
+            fullName:{
+                
+                get(){
+                    return this.firstName + this.lastName ;
+                },
+                set(value){
+                    this.firstName = value.split(' ')[0];
+                    this.lastName = value.split(' ')[1];
+                }   
+            }
+        }
+    })
+    </script>
+</body>
+</html>

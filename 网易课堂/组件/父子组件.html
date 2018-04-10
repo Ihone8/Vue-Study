@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>父子组件</title>
+</head>
+
+<body>
+    <div id="app">
+        <parent></parent>
+    </div>
+    <script src="../../static/Vue.js"></script>
+    <script>
+        //创建子组件构造器
+        let Child1 = Vue.extend({
+            template: `
+            <input type='text' value='我是子组件一'/>   
+         `
+        })
+        let Child2 = Vue.extend({
+            template: `
+            <input type='text' value='我是子组件二'/>   
+         `
+        })
+
+        //创建父组件
+        Vue.component('parent', {
+            components: {
+                'my-child1': Child1,
+                'my-child2': Child2,
+            },
+            template: `
+         <div> 
+            <input type="text" value="我是父组件"/>
+            <my-child1></my-child1>
+            <my-child2></my-child2>
+        </div>
+           
+         `
+        })
+
+
+        new Vue({
+            el: "#app"
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>V-for</title>
+    <link rel="stylesheet" href="../../static/bootstrap.css">
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="item in score">{{ item }}</li>
+            <li v-for="item in dog">
+                {{ item }}
+
+            </li>
+        </ul>
+        <table class="table table-bordered text-center col-6">
+            <thead>
+                <tr>
+                    <td>姓名</td>
+                    <td>年龄</td>
+                    <td>性别</td>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr v-for="item in persons">
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.age }}</td>
+                    <td>{{ item.sex }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="../../static/Vue.js"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                score: [100, 99, 50, 84],
+                dog: {
+                    name: "旺财",
+                    age: 13,
+                    sex: "男"
+                },
+                persons: [{
+                        name: "张三",
+                        age: 18,
+                        sex: "男"
+                    },
+                    {
+                        name: "李四",
+                        age: 20,
+                        sex: "男"
+                    },
+                    {
+                        name: "王五",
+                        age: 13,
+                        sex: "男"
+                    },
+                    {
+                        name: "赵六",
+                        age: 14,
+                        sex: "女"
+                    },
+                ]
+            }
+        })
+    </script>
+</body>
+
+</html>

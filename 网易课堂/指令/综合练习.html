@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>综合练习</title>
+
+    <style>
+        fieldset {
+            width: 600px;
+            margin: 20px auto;
+        }
+    </style>
+    <link rel="stylesheet" href="../../static/bootstrap.css">
+</head>
+
+<body>
+    <div id="app" class="container">
+        <h1>添加新学生</h1>
+
+        <div class="form-inline">
+            <span class="">姓名:</span>&nbsp;
+            <input type="text" placeholder="请输入姓名" class="form-control col-5" v-model="newStudents.name">
+        </div>
+        <br/>
+        <div class="form-inline">
+            <span>年龄:</span>&nbsp;
+            <input type="text" placeholder="请输入年龄" class="form-control col-5" v-model="newStudents.age">
+        </div>
+
+        <br/>
+        <div class="form-inline">
+            <span>手机:</span>&nbsp;
+            <input type="text" placeholder="请输入号码" class="form-control col-5" v-model="newStudents.phone">
+        </div>
+        <br/>
+        <div class="form-inline">
+            <span>性别:</span>&nbsp;
+            <select class="form-control col-5" v-model="newStudents.sex">
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
+        </div>
+        <br/>
+        <div class="form-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-primary col-5" v-on:click="createNewStudents()">添加新学生</button>
+        </div>
+        <br>
+        <table class="table table-bordered text-center ">
+            <thead>
+                <tr>
+                    <td>姓名</td>
+                    <td>年龄</td>
+                    <td>性别</td>
+                    <td>联系方式</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item,index) in persons" class="table-hover">
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.age }}</td>
+                    <td>{{ item.sex }}</td>
+                    <td>{{ item.phone }}</td>
+                    <td>
+                        <button class="btn btn-danger col-md-6" v-on:click="removeStudent(index)">删除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <script src="../../static/Vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                persons: [{
+                        name: "张三",
+                        age: 20,
+                        sex: "男",
+                        phone: "15179845578"
+                    },
+                    {
+                        name: "李四",
+                        age: 23,
+                        sex: "男",
+                        phone: "15079840778"
+                    },
+                    {
+                        name: "王五",
+                        age: 21,
+                        sex: "男",
+                        phone: "15355840778"
+                    },
+                    {
+                        name: "赵六",
+                        age: 19,
+                        sex: "女",
+                        phone: "16730840778"
+                    },
+                    {
+                        name: "麻子",
+                        age: 16,
+                        sex: "男",
+                        phone: "15079823078"
+                    },
+                ],
+                newStudents: {
+                    name: "",
+                    age: 0,
+                    sex: "男",
+                    phone: ""
+                }
+            },
+            methods: {
+                createNewStudents: function () {
+                    //验证
+                    if(this.newStudents.name ===  ""){
+                        alert("姓名不能为空");
+                        return;
+                    }
+                    if(this.newStudents.age <= 0 ){
+                        alert("年龄必须大于0");
+                        return;
+                    }
+                    if(this.newStudents.sex ===  ""){
+                        alert("性别不能为空");
+                        return;
+                    }
+                    if(this.newStudents.phone ===  ""){
+                        alert("手机号不能为空");
+                        return;
+                    }
+                    //添加新学生
+                    this.persons.unshift(this.newStudents);
+                    //清空输入框
+                    this.newStudents = {
+                        name: "",
+                        age: 0,
+                        sex: "男",
+                        phone: ""
+                    }
+                },
+                removeStudent(index){
+                    this.persons.splice(index,1);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

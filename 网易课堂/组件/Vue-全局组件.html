@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue全局组件</title>
+</head>
+
+<body>
+    <div id="app">
+        <my-date></my-date>
+        <my-date></my-date>
+    </div>
+    <script src="../../static/Vue.js"></script>
+    <script>
+        //创建组件构造器
+        let Profile = Vue.extend({
+            template: `
+            <div>
+                <input type='date'/>
+                <p>今天已经是冬天了</p>
+            </div>
+        `,
+        })
+        //创建全局组件
+        Vue.component('my-date', Profile);
+        new Vue({
+            el: "#app",
+            data: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>
