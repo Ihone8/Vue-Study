@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件通信</title>
+</head>
+
+<body>
+    <div id="app">
+        <my-div message = "今天天气很好" imgsrc = "../../static/01.jpg"></my-div>
+    </div>
+    <template id="my-div">
+        <div>
+            <h1>{{  message }}</h1>
+            <img v-bind:src="imgsrc" width="400" alt="">
+        </div>
+    </template>
+    <script src="../../static/Vue.js"></script>
+    <script>
+        Vue.component('my-div', {
+            template: "#my-div",
+            props:['message','imgsrc']
+        })
+        new Vue({
+            el: "#app",
+            data: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

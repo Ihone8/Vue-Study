@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>多层组件通信</title>
+</head>
+<body>
+    <div id="app">
+        <my-parent :imgsrc="imgsrc" :title="title"></my-parent>
+    </div>
+        
+    <template id="myimg">      
+            <img v-bind:src="imgsrc" alt="" width="400">       
+    </template>
+
+    <template id="mytitle">  
+            <h1>{{ title }}</h1>
+    </template>
+
+    <template id="parent">
+        <div>
+         <child2 :title="title"></child2>
+         <child1 :imgsrc="imgsrc"></child1>
+         
+        </div>
+    </template>
+    <script src="../../static/Vue.js"></script>
+    <script>
+        //实例化子组件
+        let Child1 = Vue.extend({
+            template:"#myimg",
+            props:['imgsrc']
+        })
+        let Child2 = Vue.extend({
+            template:"#mytitle",
+            props:['title']
+        })
+    //父组件
+    Vue.component('my-parent',{
+        template:"#parent",
+        components:{
+            child1 : Child1,
+            child2 : Child2
+        },
+        props:['imgsrc','title']
+    })
+    new Vue({
+        el:"#app",
+        data:{
+            title : "火影忍者",
+            imgsrc:"../../static/01.jpg"
+        }
+    })
+    </script>
+</body>
+</html>

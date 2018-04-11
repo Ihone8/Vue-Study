@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自定义事件</title>
+</head>
+<body>
+    <div id="app">
+        <my-btn @total="GetCount()"></my-btn>
+        <my-btn @total="GetCount()"></my-btn>
+        <my-btn @total="GetCount()"></my-btn>
+        <my-btn @total="GetCount()"></my-btn>
+        <my-btn @total="GetCount()"></my-btn>
+        <my-btn @total="GetCount()"></my-btn>
+        <p>你一共点击多少{{ count }}次</p>
+    </div>
+
+    <template id="btn">
+        <button @click="total()" >点击了{{ count }} 次</button>
+    </template>
+    <script src="../../static/Vue.js"></script>
+    <script>
+
+        Vue.component('my-btn',{
+            template:"#btn",
+            data:function(){
+                return {
+                    count : 0
+                }
+            },
+            methods:{
+                total(){
+                    this.count ++ ;
+                    this.$emit("total")
+                }
+            }
+        })
+        new Vue({
+            el:"#app",
+            data:{
+                count:0
+            },
+            methods:{
+                GetCount(){
+                    this.count++ ;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

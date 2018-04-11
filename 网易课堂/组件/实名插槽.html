@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>实名插槽</title>
+</head>
+
+<body>
+    <div id="app">
+        <my-slot>
+            <div slot="cpu">Inter Core I8</div>
+            <div slot="gpu">Inter 5140</div>
+            <div slot="memory">DDR3 4G 低压</div>
+            <div slot="hard-drive">东芝500G</div>
+        </my-slot>
+    </div>
+    <template id="my_slot">
+        <div>
+            <slot name="cpu">这里是插CPU的</slot>
+            <slot name="gpu">这里是插GPU的</slot>
+            <slot name="memory">这里是插内存条的</slot>
+            <slot name="hard-drive">这里是插硬盘的</slot>
+        </div>
+    </template>
+    <script src="../../static/Vue.js"></script>
+    <script>
+        Vue.component('my-slot', {
+            template: "#my_slot"
+        })
+        new Vue({
+            el: "#app",
+            data: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

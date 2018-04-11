@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>V-router</title>
+    <link rel="stylesheet" href="../../static/bootstrap.css">
+    <style>
+        body {
+            background-color: #e8e8e8;
+        }
+
+        html,body{
+            width: 1300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+                <div class="page-header">
+                    <h1>IT 教育
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="max-width: 1376px;">
+            <div class="col-xs-2 col-xs-offset-2">
+                <div class="list-group">
+                    <!-- 使用 router-link 组件来导航. -->
+                    <!-- 通过传入 `to` 属性指定链接. -->
+                    <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+                    <router-link class="list-group-item" :to="{name:'h5'}">HTML5 学院</router-link>
+                    <router-link class="list-group-item" :to="{name:'java'}">Java 学院</router-link>
+                    <router-link class="list-group-item" :to="{name:'python'}">Python 学院</router-link>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <!-- 路由出口 -->
+                        <!-- 路由匹配到的组件将渲染在这里 -->
+                        <router-view></router-view>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <template id="h5">
+        <div>
+            <h4>Html5 学院</h4>
+            <p>掌握面向未来的神技!</p>
+            <img src="../../static/h5.jpg" width="300" alt="">
+            <div>
+                <ul class="na nav-tabs">
+                    <router-link to="/h5/basic">HTML5 基础班</router-link>
+                    <router-link to="/h5/big">HTML5 大神班</router-link>
+                </ul>
+                <div class="tab-content">
+                    <!--HTML5 子 路由出口 -->
+                    <!-- 路由匹配到的组件将渲染在这里 -->
+                    <router-view></router-view>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="basic">
+        <div>
+            <h1>基础班</h1>
+            <p> 开始好好学习基本知识</p>
+        </div>
+    </template>
+
+    <template id="big">
+        <div>
+            <h1>大神班</h1>
+            <p>开始学习最新的技术</p>
+        </div>
+    </template>
+
+    <template id="java">
+        <div>
+            <h3>Java 学院</h3>
+            <p>Java面向对象编程!</p>
+            <img src="../../static/java.jpg" width="300" alt="">
+        </div>
+    </template>
+    <template id="python">
+        <div>
+            <h3>Python 学院</h3>
+            <p>网页小爬虫!</p>
+            <img src="../../static/python.jpg" width="300" alt="">
+        </div>
+    </template>
+    <script src="../../static/Vue.js"></script>
+    <script src="../../static/vue-router.js"></script>
+    <script>
+        //创建组件
+        const Html5 = Vue.extend({
+            template: "#h5"
+        })
+        const Java = Vue.extend({
+            template: "#java"
+        })
+        const Python = Vue.extend({
+            template: "#python"
+        })
+        const Basic = Vue.extend({
+            template: "#basic"
+        })
+        const Big = Vue.extend({
+            template: "#big"
+        })
+        //定义路由
+        const routes = [{
+                path: '/h5',
+                component: Html5,
+                name:"h5",
+                children: [{
+                        path: 'basic',
+                        component: Basic
+                    },
+                    {
+                        path: 'big',
+                        component: Big
+                    },
+                    //配置根路由
+                    {
+                        path: '/',
+                        redirect: "basic"
+                    }
+                ]
+            },
+            {
+                path: '/java',
+                component: Java,
+                name:"java"
+            },
+            {
+                path: '/python',
+                component: Python,
+                name:"python"
+            },
+            //配置根路由
+            {
+                path: "/",
+                redirect: "/h5"
+            }
+        ]
+        //创建路由实例
+        const router = new VueRouter({
+            routes
+        })
+
+        //挂载
+        new Vue({
+            router
+        }).$mount("#app")
+    </script>
+</body>
+
+</html>

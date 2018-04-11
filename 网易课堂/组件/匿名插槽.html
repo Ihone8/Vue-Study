@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>匿名插槽</title>
+</head>
+<body>
+    <div id="app">
+        <my-slot>
+            <img src="../../static/01.jpg" width="500" alt="">
+            <p>this is a LOL Hero</p>
+        </my-slot>
+    </div>
+    <template id="my_slot">
+        <div>
+            <header>this is a Header</header>
+            <slot>可以替换任何标签,默认显示的内容</slot>
+            <footer>this is a Footer</footer>
+        </div>
+    </template>
+    <script src="../../static/Vue.js"></script>
+    <script>
+        Vue.component('my-slot',{
+            template:"#my_slot"
+        })
+        new Vue({
+            el:"#app",
+            data:{
+
+            }
+        })
+    </script>
+</body>
+</html>
