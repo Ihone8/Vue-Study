@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>购物车</title>
+    <link rel="stylesheet" href="../../static/bootstrap.css">
+    <style>
+        .row {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        .table th,
+        .table td {
+            text-align: center;
+            vertical-align: middle !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <div class="page-header text-center">
+                    <h1>购物车</h1>
+                </div>
+                <table class="table table-bordered ">
+                    <thead>
+                        <th>
+                            <input type="checkbox">
+                            <span>全选</span>
+                        </th>
+                        <th></th>
+                        <th>名称</th>
+                        <th>价格</th>
+                        <th>数量</th>
+                        <th>总价</th>
+                        <th>操作</th>
+                    </thead>
+                    <tbody>
+                        <td>
+                            <input type="checkbox">
+                        </td>
+                        <td>
+                            <img src="../../static/fsg.jpg" width="80" alt="">
+                        </td>
+                        <td class="text-left">饭扫光什锦木耳金针菇280g*3瓶下饭菜酱菜拌面拌饭酱泡菜咸菜泡椒</td>
+                        <td>34.90</td>
+                        <td class="col-xs-2">
+                            <div class="input-group">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default  ">-</button>
+                                </div>
+                                <input type="text" value="1" class="form-control ">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default  ">+</button>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            34.90
+                        </td>
+                        <td>
+                            <button class="btn btn-link">删除</button>
+                        </td>
+                    </tbody>
+                    <tr>
+                        <td colspan="1">
+                            <input type="checkbox">
+                            <span>全选</span>
+                        </td>
+                        <td colspan="4">
+                            总价：<span class="text-danger" >550</span>
+                        </td>
+                        <td colspan="3">
+                            <button class="btn btn-danger col-lg-12">结算</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="../../static/Vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.0"></script>
+    <script src="./JDShopCar.js"></script>
+</body>
+</html>

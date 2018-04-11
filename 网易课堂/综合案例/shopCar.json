@@ -1,0 +1,28 @@
+{
+    "AllShops":{
+        "totalMoney":0,
+        "shopList":[
+            {
+                "shopId":"1001",
+                "shopName":"饭扫光什锦木耳金针菇280g*3瓶下饭菜酱菜拌面拌饭酱泡菜咸菜泡椒",
+                "shopPrice":34.90,
+                "shopNumber":1,
+                "shopImage":"../../static/fsg.jpg"
+            },
+            {
+                "shopId":"1002",
+                "shopName":"热闹客韩版春季男新款青年学生休闲帆布鞋男低帮百搭系带平板潮鞋",
+                "shopPrice":178.00,
+                "shopNumber":1,
+                "shopImage":"../../static/nx.jpg"
+            },
+            {
+                "shopId":"1003",
+                "shopName":"热闹客男鞋2018春季新款时尚百搭潮流低帮系带板鞋青年学生鞋子男",
+                "shopPrice":198.00,
+                "shopNumber":1,
+                "shopImage":"../../static/nx2.jpg"
+            }
+        ]
+    }
+}
