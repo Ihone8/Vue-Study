@@ -11,8 +11,7 @@ new Vue({
     methods:{
         //获取商品数据
         getShopCarData(){
-            this.$http.get('./shopCar.json').then(response => {
-                alert("666");
+            this.$http.jsonp('http://localhost:54121/Two.ashx',{jsonp:"callback"}).then(response => {
                 console.log(response.body)
              
               }, response => {
